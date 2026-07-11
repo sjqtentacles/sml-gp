@@ -56,6 +56,27 @@ Gp.logMarginalLikelihood (Gp.rbf 0.01) 0.01 xs ys   (* worse fit *)
 - Solves a dense `n×n` system via `sml-matrix`, so it is intended for modest
   training-set sizes.
 
+## Example
+
+`make example` builds and runs [`examples/demo.sml`](examples/demo.sml), which
+fits both kernels to five noisy samples of sin(x), computes the posterior
+mean and mean+variance at four query points, and the log marginal likelihood
+under each kernel (output is byte-identical under MLton and Poly/ML):
+
+```
+GP demo
+rbf 1.0: k(0,0)=1.0000, k(0,1)=0.6065
+matern32 1.0: k(0,0)=1.0000, k(0,1)=0.4834
+predict (RBF, l=1.0) at [0.5,1.5,2.5,3.5]
+  posterior mean = [0.4383,1.0077,0.6049,~0.3834]
+  x=0.5: mean=0.4324, var=0.0221
+  x=1.5: mean=1.0016, var=0.0160
+  x=2.5: mean=0.6016, var=0.0160
+  x=3.5: mean=~0.3839, var=0.0221
+log marginal likelihood (RBF, sigma^2=0.01) = ~4.4706
+log marginal likelihood (Matern32, sigma^2=0.01) = ~5.0609
+```
+
 ## Installing with smlpkg
 
 ```sh
